@@ -1,0 +1,132 @@
+:root {
+  --primary: #ff4f4f;
+  --secondary: #4ecdc4;
+  --dark: #2d3436;
+  --light: #f9f9f9;
+  --shadow: rgba(0, 0, 0, 0.1);
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+}
+
+.container {
+  background: var(--light);
+  padding: 2rem;
+  border-radius: 24px;
+  box-shadow: 0 10px 30px var(--shadow);
+  text-align: center;
+  width: 90%;
+  max-width: 400px;
+}
+
+#time {
+  font-size: 5rem;
+  font-weight: 700;
+  color: var(--dark);
+  margin: 1rem 0;
+  font-variant-numeric: tabular-nums;
+}
+
+.buttons {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  margin-top: 2rem;
+}
+
+button {
+  border: none;
+  border-radius: 12px;
+  padding: 1rem 2rem;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+#startBtn {
+  background: var(--primary);
+  color: white;
+  min-width: 100px;
+}
+
+#startBtn:hover {
+  background: #ff3636;
+  transform: translateY(-2px);
+}
+
+#resetBtn {
+  background: #e0e0e0;
+  color: var(--dark);
+}
+
+#resetBtn:hover {
+  background: #d0d0d0;
+  transform: translateY(-2px);
+}
+
+#modeToggle {
+  position: absolute;
+  top: 2rem;
+  right: 2rem;
+  background: transparent;
+  font-size: 1.5rem;
+  padding: 0.8rem;
+  border-radius: 50%;
+  transition: all 0.3s ease;
+  width: 3.5rem;
+  height: 3.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid var(--primary);
+}
+
+#modeToggle:hover {
+  background: var(--shadow);
+  transform: rotate(15deg);
+}
+
+#modeToggle.break {
+  color: var(--secondary);
+  border-color: var(--secondary);
+}
+
+.progress-ring {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: -1;
+}
+
+.progress-ring__circle {
+  transition: stroke-dashoffset 0.3s;
+  transform: rotate(-90deg);
+  transform-origin: 50% 50%;
+  stroke: var(--primary);
+}
+
+.break .progress-ring__circle {
+  stroke: var(--secondary);
+}
+
+.mode-label {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--primary);
+  margin-bottom: 0.5rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.break .mode-label {
+  color: var(--secondary);
+} 

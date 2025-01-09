@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Focus Timer</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <svg class="progress-ring" width="400" height="400">
+            <circle class="progress-ring__circle" stroke-width="8" fill="transparent" r="180" cx="200" cy="200"/>
+        </svg>
+        <div class="mode-label" id="modeLabel">Focus Time</div>
+        <div id="time">25:00</div>
+        <div class="buttons">
+            <button id="startBtn">Start</button>
+            <button id="resetBtn">Reset</button>
+        </div>
+    </div>
+    <button id="modeToggle" title="Toggle Break/Focus Mode">��</button>
+    <script src="script.js"></script>
+</body>
+</html> 
