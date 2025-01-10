@@ -11,6 +11,8 @@ const circle = document.querySelector('.progress-ring__circle');
 circle.style.strokeDasharray = `${CIRCUMFERENCE} ${CIRCUMFERENCE}`;
 circle.style.strokeDashoffset = 0;
 
+let currentFocus = '';
+
 function setProgress(percent) {
     const offset = CIRCUMFERENCE - (percent / 100 * CIRCUMFERENCE);
     circle.style.strokeDashoffset = offset;
@@ -32,23 +34,75 @@ function updateDisplay() {
 }
 
 function startTimer() {
-    const startBtn = document.getElementById('startBtn');
-    
     if (timerId === null) {
-        startBtn.textContent = 'Pause';
-        startBtn.style.background = 'var(--secondary)';  // Use blue color when paused
-        
-        timerId = setInterval(() => {
-            timeLeft--;
-            updateDisplay();
+        if (!isBreakMode) {
+            // Show modal for focus time
+            const modal = document.getElementById('focusModal');
+            const input = document.getElementById('focusInput');
+            const confirmBtn = document.getElementById('confirmFocus');
+            const cancelBtn = document.getElementById('cancelFocus');
             
-            if (timeLeft === 0) {
-                resetTimer();
+            function handleFocusStart() {
+                const focusTask = input.value.trim();
+                if (focusTask) {
+                    currentFocus = focusTask;
+                    const focusDisplay = document.getElementById('focusDisplay');
+                    focusDisplay.textContent = currentFocus;
+                    focusDisplay.style.display = 'block';
+                    
+                    modal.classList.remove('show');
+                    input.value = '';
+                    startTimerInterval();
+                }
             }
-        }, 1000);
+
+            function handleCancel() {
+                modal.classList.remove('show');
+                input.value = '';
+            }
+
+            function handleKeydown(e) {
+                if (e.key === 'Enter') {
+                    handleFocusStart();
+                } else if (e.key === 'Escape') {
+                    handleCancel();
+                }
+            }
+
+            // Set up event listeners
+            confirmBtn.onclick = handleFocusStart;
+            cancelBtn.onclick = handleCancel;
+            input.onkeydown = handleKeydown;
+            
+            // Show modal and focus input
+            modal.classList.add('show');
+            input.focus();
+        } else {
+            // Start break timer immediately
+            startTimerInterval();
+        }
     } else {
         pauseTimer();
     }
+}
+
+// Helper function to start the timer interval
+function startTimerInterval() {
+    const startBtn = document.getElementById('startBtn');
+    startBtn.textContent = 'Pause';
+    startBtn.style.background = 'var(--secondary)';
+    
+    timerId = setInterval(() => {
+        if (timeLeft > 0) {
+            timeLeft--;
+            updateDisplay();
+        } else {
+            clearInterval(timerId);
+            timerId = null;
+            startBtn.textContent = 'Start';
+            startBtn.style.background = 'var(--primary)';
+        }
+    }, 1000);
 }
 
 function pauseTimer() {
@@ -69,9 +123,12 @@ function toggleMode() {
     isBreakMode = !isBreakMode;
     const toggleBtn = document.getElementById('modeToggle');
     const modeLabel = document.getElementById('modeLabel');
+    const focusDisplay = document.getElementById('focusDisplay');
     
     toggleBtn.textContent = isBreakMode ? '☕' : '💻';
     modeLabel.textContent = isBreakMode ? 'Break Time' : 'Focus Time';
+    
+    focusDisplay.style.display = isBreakMode ? 'none' : (currentFocus ? 'block' : 'none');
     
     toggleBtn.classList.toggle('break');
     document.querySelector('.progress-ring').classList.toggle('break');
@@ -80,6 +137,13 @@ function toggleMode() {
 
 // Move initialization code inside DOMContentLoaded
 document.addEventListener('DOMContentLoaded', () => {
+    // Add focus display element
+    const container = document.querySelector('.container');
+    const focusDisplay = document.createElement('div');
+    focusDisplay.id = 'focusDisplay';
+    focusDisplay.style.display = 'none';
+    container.insertBefore(focusDisplay, container.querySelector('.mode-label'));
+    
     // Set initial emoji and label
     const toggleBtn = document.getElementById('modeToggle');
     const modeLabel = document.getElementById('modeLabel');

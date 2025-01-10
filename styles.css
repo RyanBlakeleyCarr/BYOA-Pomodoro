@@ -129,4 +129,110 @@ button {
 
 .break .mode-label {
   color: var(--secondary);
+}
+
+#focusDisplay {
+  text-align: center;
+  margin-bottom: 1rem;
+  font-size: 1.2rem;
+  color: var(--text);
+  font-weight: 500;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(5px);
+    z-index: 1000;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.modal.show {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 1;
+}
+
+.modal-content {
+    background: var(--light);
+    padding: 2rem;
+    border-radius: 24px;
+    box-shadow: 0 10px 30px var(--shadow);
+    width: 90%;
+    max-width: 400px;
+    transform: translateY(20px);
+    transition: transform 0.3s ease;
+}
+
+.modal.show .modal-content {
+    transform: translateY(0);
+}
+
+.modal h2 {
+    color: var(--dark);
+    margin-top: 0;
+    margin-bottom: 1.5rem;
+    font-size: 1.5rem;
+}
+
+#focusInput {
+    width: 100%;
+    padding: 1rem;
+    border: 2px solid #e0e0e0;
+    border-radius: 12px;
+    font-size: 1rem;
+    margin-bottom: 1.5rem;
+    box-sizing: border-box;
+    font-family: inherit;
+    transition: border-color 0.3s ease;
+}
+
+#focusInput:focus {
+    outline: none;
+    border-color: var(--primary);
+}
+
+.modal-buttons {
+    display: flex;
+    gap: 1rem;
+    justify-content: flex-end;
+}
+
+.modal-btn {
+    padding: 0.8rem 1.5rem;
+    border-radius: 12px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: none;
+}
+
+.modal-btn:not(.primary) {
+    background: #e0e0e0;
+    color: var(--dark);
+}
+
+.modal-btn.primary {
+    background: var(--primary);
+    color: white;
+}
+
+.modal-btn:hover {
+    transform: translateY(-2px);
+}
+
+.modal-btn:not(.primary):hover {
+    background: #d0d0d0;
+}
+
+.modal-btn.primary:hover {
+    background: #ff3636;
 } 
