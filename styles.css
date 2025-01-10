@@ -153,6 +153,8 @@ button {
     z-index: 1000;
     opacity: 0;
     transition: opacity 0.3s ease;
+    padding: 1rem;
+    box-sizing: border-box;
 }
 
 .modal.show {
@@ -171,6 +173,7 @@ button {
     max-width: 400px;
     transform: translateY(20px);
     transition: transform 0.3s ease;
+    margin: 1rem;
 }
 
 .modal.show .modal-content {
