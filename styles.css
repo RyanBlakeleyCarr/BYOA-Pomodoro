@@ -174,6 +174,8 @@ button {
     transform: translateY(20px);
     transition: transform 0.3s ease;
     margin: 1rem;
+    display: flex;
+    flex-direction: column;
 }
 
 .modal.show .modal-content {
@@ -182,9 +184,12 @@ button {
 
 .modal h2 {
     color: var(--dark);
-    margin-top: 0;
-    margin-bottom: 1.5rem;
+    margin: 0 0 1.5rem 0;
     font-size: 1.5rem;
+    text-align: center;
+    padding: 0;
+    line-height: 1.3;
+    width: 100%;
 }
 
 #focusInput {
@@ -197,6 +202,7 @@ button {
     box-sizing: border-box;
     font-family: inherit;
     transition: border-color 0.3s ease;
+    text-align: center;
 }
 
 #focusInput:focus {
