@@ -19,8 +19,11 @@ function setProgress(percent) {
 function updateDisplay() {
     const minutes = Math.floor(timeLeft / 60);
     const seconds = timeLeft % 60;
-    document.getElementById('time').textContent = 
-        `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+    const timeString = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+    
+    // Update display and page title
+    document.getElementById('time').textContent = timeString;
+    document.title = `${timeString} - ${isBreakMode ? 'Break' : 'Focus'} Time`;
     
     // Update progress ring
     const totalTime = isBreakMode ? BREAK_TIME : FOCUS_TIME;
